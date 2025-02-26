@@ -1,162 +1,154 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { FaBars, FaTimes } from 'react-icons/fa';
 import styled from 'styled-components';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
 
-const PageContent = styled.div`
-  padding: 80px 20px;
-  text-align: center;
-  background-color: #f4f4f4;
-  min-height: calc(100vh - 120px);
-`;
-
-const ClassesContainer = styled.div`
+const Navbar = styled.nav`
   display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-top: 40px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background-color: #333;
+  color: white;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 `;
 
-const ClassCard = styled.div`
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  width: 300px;
-  transition: transform 0.3s ease;
-  cursor: pointer;
+const Logo = styled.div`
+  font-size: 28px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #fff;
+  transition: color 0.3s;
   &:hover {
-    transform: translateY(-10px);
+    color: #1e90ff;
   }
 `;
 
-const ClassTitle = styled.h3`
-  background-color: #3498db;
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 15px;
-`;
-
-const ProfileContainer = styled.div`
+const NavLinks = styled.ul`
   display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
+  list-style: none;
+  padding-left: 90px;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
-const ProfileWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+const NavLink = styled.li`
+  margin: 0 20px;
+  font-size: 18px;
+  color: #f1f1f1;
+  transition: color 0.3s;
+  &:hover {
+    color: #1e90ff;
+  }
 `;
 
-const ProfileImage = styled.img`
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #ddd;
-`;
-
-const classmates = {
-  'Kelas SI': [
-    { name: 'Andi', image: '/aziz.jpeg' },
-    { name: 'Budi', image: '/aziz.jpeg' },
-    { name: 'Citra', image: '/aziz.jpeg' },
-    { name: 'Dina', image: '/aziz.jpeg' },
-    { name: 'Eka', image: '/aziz.jpeg' }
-  ],
-  'Kelas KA': [
-    { name: 'Faisal', image: '/aziz.jpeg' },
-    { name: 'Gita', image: '/aziz.jpeg' },
-    { name: 'Hana', image: '/aziz.jpeg' },
-    { name: 'Ivan', image: '/aziz.jpeg' },
-    { name: 'Joko', image: '/aziz.jpeg' }
-  ],
-  'Kelas BD': [
-    { name: 'Kiki', image: '/aziz.jpeg' },
-    { name: 'Lina', image: '/aziz.jpeg' },
-    { name: 'Mira', image: '/aziz.jpeg' },
-    { name: 'Nanda', image: '/aziz.jpeg' },
-    { name: 'Omar', image: '/aziz.jpeg' }
-  ]
-};
-
-const Modal = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ModalContent = styled.div`
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  text-align: center;
-  width: 700px;
-`;
-
-const CloseButton = styled.button`
-  margin-top: 10px;
-  padding: 5px 10px;
-  border: none;
-  background: red;
-  color: white;
-  border-radius: 5px;
+const MobileMenuIcon = styled.div`
+  display: none;
+  font-size: 30px;
   cursor: pointer;
+  @media (max-width: 768px) {
+    display: block;
+  }
 `;
 
-export default function Home() {
-  const [selectedClass, setSelectedClass] = useState(null);
+const MobileMenu = styled.ul`
+  display: ${({ show }) => (show ? 'block' : 'none')};
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  width: 90%;
+  max-width: 250px;
+  background: #333;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  list-style: none;
+`;
+
+const MobileNavLink = styled.li`
+  padding: 10px 0;
+  font-size: 18px;
+  color: #f1f1f1;
+  border-bottom: 1px solid #444;
+  &:last-child {
+    border-bottom: none;
+  }
+  &:hover {
+    color: #1e90ff;
+  }
+`;
+
+export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setIsMenuOpen(false);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <div style={{ position: 'relative', minHeight: '100vh', overflowX: 'hidden' }}>
-      <Header />
-      <PageContent>
-        <h2 style={{ marginTop: '40px' }}>Best Friends in Each Class</h2>
-        <ClassesContainer>
-          {Object.entries(classmates).map(([className, students]) => (
-            <ClassCard key={className} onClick={() => setSelectedClass({ className, students })}>
-              <ClassTitle>{className}</ClassTitle>
-              <ProfileContainer>
-                {students.map((student, index) => (
-                  <ProfileImage key={index} src={student.image} alt={student.name} />
-                ))}
-              </ProfileContainer>
-            </ClassCard>
-          ))}
-        </ClassesContainer>
-      </PageContent>
-      <Footer />
-
-      {selectedClass && (
-        <Modal onClick={() => setSelectedClass(null)}>
-          <ModalContent onClick={(e) => e.stopPropagation()}>
-            <h3>{selectedClass.className}</h3>
-            <ProfileContainer>
-              {selectedClass.students.map((student, index) => (
-                <ProfileWrapper key={index}>
-                  <ProfileImage src={student.image} alt={student.name} />
-                  <p>{student.name}</p>
-                  <p>{selectedClass.className}</p>
-                </ProfileWrapper>
-              ))}
-            </ProfileContainer>
-            <CloseButton onClick={() => setSelectedClass(null)}>Close</CloseButton>
-          </ModalContent>
-        </Modal>
-      )}
-    </div>
+    <>
+      <Navbar>
+        <Logo>LMS</Logo>
+        <NavLinks>
+          <NavLink>
+            <Link href="/">About</Link>
+          </NavLink>
+          <NavLink>
+            <Link href="/skills">Skills</Link>
+          </NavLink>
+          <NavLink>
+            <Link href="/portfolio">Portfolio</Link>
+          </NavLink>
+          <NavLink>
+            <Link href="/services">Services</Link>
+          </NavLink>
+          <NavLink>
+            <Link href="/contact">Contact</Link>
+          </NavLink>
+          <NavLink>
+            <Link href="/challange3">3 Kelas</Link>
+          </NavLink>
+        </NavLinks>
+        <MobileMenuIcon onClick={toggleMenu}>
+          {isMenuOpen ? <FaTimes /> : <FaBars />}
+        </MobileMenuIcon>
+      </Navbar>
+      <MobileMenu show={isMenuOpen}>
+        <MobileNavLink onClick={() => setIsMenuOpen(false)}>
+          <Link href="/">About</Link>
+        </MobileNavLink>
+        <MobileNavLink onClick={() => setIsMenuOpen(false)}>
+          <Link href="/skills">Skills</Link>
+        </MobileNavLink>
+        <MobileNavLink onClick={() => setIsMenuOpen(false)}>
+          <Link href="/portfolio">Portfolio</Link>
+        </MobileNavLink>
+        <MobileNavLink onClick={() => setIsMenuOpen(false)}>
+          <Link href="/services">Services</Link>
+        </MobileNavLink>
+        <MobileNavLink onClick={() => setIsMenuOpen(false)}>
+          <Link href="/contact">Contact</Link>
+        </MobileNavLink>
+        <MobileNavLink onClick={() => setIsMenuOpen(false)}>
+          <Link href="/challange3">3 Kelas</Link>
+        </MobileNavLink>
+      </MobileMenu>
+    </>
   );
 }
