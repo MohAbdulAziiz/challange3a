@@ -76,7 +76,7 @@ const classmates = {
   ],
   'Kelas KA': [
     { name: 'Faisal', image: '/contoh4.jpg' },
-    { name: 'Gita', image: '/contoh5.jpg' },
+    { name: 'Gita', image: '/contoh2.jpg' },
     { name: 'Hana', image: '/contoh6.jpg' }
   ],
   'Kelas BD': [
