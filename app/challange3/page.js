@@ -65,25 +65,19 @@ const ProfileImage = styled.img`
 
 const classmates = {
   'Kelas SI': [
-    { name: 'Andi', image: '/placeholder.jpg' },
-    { name: 'Budi', image: '/placeholder.jpg' },
-    { name: 'Citra', image: '/placeholder.jpg' },
-    { name: 'Dina', image: '/placeholder.jpg' },
-    { name: 'Eka', image: '/placeholder.jpg' }
+    { name: 'Andi', image: '/contoh1.jpg' },
+    { name: 'Budi', image: '/contoh2.jpg' },
+    { name: 'Citra', image: '/contoh3.jpg' }
   ],
   'Kelas KA': [
-    { name: 'Faisal', image: '/placeholder.jpg' },
-    { name: 'Gita', image: '/placeholder.jpg' },
-    { name: 'Hana', image: '/placeholder.jpg' },
-    { name: 'Ivan', image: '/placeholder.jpg' },
-    { name: 'Joko', image: '/placeholder.jpg' }
+    { name: 'Faisal', image: '/contoh4.jpg' },
+    { name: 'Gita', image: '/contoh5.jpg' },
+    { name: 'Hana', image: '/contoh6.jpg' }
   ],
   'Kelas BD': [
-    { name: 'Kiki', image: '/placeholder.jpg' },
-    { name: 'Lina', image: '/placeholder.jpg' },
-    { name: 'Mira', image: '/placeholder.jpg' },
-    { name: 'Nanda', image: '/placeholder.jpg' },
-    { name: 'Omar', image: '/placeholder.jpg' }
+    { name: 'Kiki', image: '/contoh7.jpg' },
+    { name: 'Lina', image: '/contoh8.jpg' },
+    { name: 'Mira', image: '/contoh9.jpg' }
   ]
 };
 
