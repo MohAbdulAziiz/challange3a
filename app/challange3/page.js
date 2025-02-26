@@ -65,25 +65,25 @@ const ProfileImage = styled.img`
 
 const classmates = {
   'Kelas SI': [
-    { name: 'Andi', image: '/aziz.jpeg' },
-    { name: 'Budi', image: '/aziz.jpeg' },
-    { name: 'Citra', image: '/aziz.jpeg' },
-    { name: 'Dina', image: '/aziz.jpeg' },
-    { name: 'Eka', image: '/aziz.jpeg' }
+    { name: 'Andi', image: '/placeholder.jpg' },
+    { name: 'Budi', image: '/placeholder.jpg' },
+    { name: 'Citra', image: '/placeholder.jpg' },
+    { name: 'Dina', image: '/placeholder.jpg' },
+    { name: 'Eka', image: '/placeholder.jpg' }
   ],
   'Kelas KA': [
-    { name: 'Faisal', image: '/aziz.jpeg' },
-    { name: 'Gita', image: '/aziz.jpeg' },
-    { name: 'Hana', image: '/aziz.jpeg' },
-    { name: 'Ivan', image: '/aziz.jpeg' },
-    { name: 'Joko', image: '/aziz.jpeg' }
+    { name: 'Faisal', image: '/placeholder.jpg' },
+    { name: 'Gita', image: '/placeholder.jpg' },
+    { name: 'Hana', image: '/placeholder.jpg' },
+    { name: 'Ivan', image: '/placeholder.jpg' },
+    { name: 'Joko', image: '/placeholder.jpg' }
   ],
   'Kelas BD': [
-    { name: 'Kiki', image: '/aziz.jpeg' },
-    { name: 'Lina', image: '/aziz.jpeg' },
-    { name: 'Mira', image: '/aziz.jpeg' },
-    { name: 'Nanda', image: '/aziz.jpeg' },
-    { name: 'Omar', image: '/aziz.jpeg' }
+    { name: 'Kiki', image: '/placeholder.jpg' },
+    { name: 'Lina', image: '/placeholder.jpg' },
+    { name: 'Mira', image: '/placeholder.jpg' },
+    { name: 'Nanda', image: '/placeholder.jpg' },
+    { name: 'Omar', image: '/placeholder.jpg' }
   ]
 };
 
